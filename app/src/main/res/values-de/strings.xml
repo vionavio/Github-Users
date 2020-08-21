@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github-Benutzer</string>
+    <string name="search_user">Benutzer Suchen</string>
+    <string name="following">Folgen</string>
+    <string name="followers">Anhänger</string>
+    <string name="search">Suche</string>
+    <string name="detail_user">Detail Benutzer</string>
+    <string name="repository">Repository</string>
+    <string name="share">Aktie</string>
+    <string name="check_profile">Hey, überprüfe dieses profil von</string>
+    <string name="on">auf</string>
+</resources>

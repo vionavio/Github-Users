@@ -1,0 +1,22 @@
+<resources>
+
+    <style name="SearchTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="colorPrimary">@color/darkBrown</item>
+        <item name="colorPrimaryDark">@color/brown</item>
+        <item name="colorAccent">@color/brown</item>
+        <item name="android:textColor">@color/darkBrown</item>
+    </style>
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/darkBrown</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+
+
+</resources>
