@@ -18,10 +18,7 @@ class ViewModel: ViewModel() {
     fun searchUser(newText: String) {
         val call = Client.service.getSearch(newText)
         call.enqueue(object : Callback<SearchResponse> {
-            override fun onResponse(
-                call: Call<SearchResponse>,
-                response: Response<SearchResponse>
-            ) {
+            override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 if (response.isSuccessful) {
                     val listUser = response.body()?.items
                     searchResultsLiveData.postValue(listUser)
