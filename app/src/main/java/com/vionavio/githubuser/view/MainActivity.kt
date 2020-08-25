@@ -3,12 +3,16 @@ package com.vionavio.githubuser.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +43,12 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             ViewModel::class.java
         )
+        viewModel.getUserApi()
+        viewModel.userData.observe(this, Observer { listUser: List<User>? ->
+            false.showProgressBar()
+            adapter.addAll(listUser)
+        })
+
         viewModel.searchResults.observe(this, Observer { listUser: List<User>? ->
             false.showProgressBar()
             adapter.addAll(listUser)
@@ -46,6 +56,10 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
     }
 
     private fun initViewConfigure() {
+
+        setSupportActionBar(detail_toolbar)
+        supportActionBar?.title = getString(R.string.app_name)
+
         adapter =
             ComponentAdapter(onClick = { user: User ->
                 val intent = Intent(this, DetailActivity::class.java)
@@ -84,5 +98,43 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
         inputMethodManager.hideSoftInputFromWindow(
             activity.currentFocus?.windowToken, 0
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        val favourite = menu.findItem(R.id.action_favourite)
+        favourite.isVisible = true
+        val alarm = menu.findItem(R.id.action_alarm)
+        alarm.isVisible = true
+        val language = menu.findItem(R.id.action_language)
+        language.isVisible = true
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_favourite -> {
+                Toast.makeText(this, "Anda klik favorite", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.action_alarm -> {
+                startActivity(Intent(this@MainActivity, SettingPreferenceActivity::class.java))
+                true
+            }
+            R.id.action_language -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

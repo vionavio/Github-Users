@@ -3,15 +3,17 @@ package com.vionavio.githubuser.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.adapter.SectionAdapter
 import com.vionavio.githubuser.connection.Client
 import com.vionavio.githubuser.model.User
-import com.vionavio.githubuser.util.GlideApp
+import com.vionavio.githubuser.util.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -142,10 +144,34 @@ class DetailActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        val share = menu.findItem(R.id.action_share)
+        share.isVisible = true
+        val favourite = menu.findItem(R.id.action_favourite)
+        favourite.isVisible = true
+        val alarm = menu.findItem(R.id.action_alarm)
+        alarm.isVisible = true
+        val language = menu.findItem(R.id.action_language)
+        language.isVisible = true
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_share -> {
                 shareUser()
+                true
+            }
+            R.id.action_favourite -> {
+                Toast.makeText(this, "Anda klik favorite", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.action_alarm -> {
+                Toast.makeText(this, "Anda klik alarm", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.action_language -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
             else -> super.onOptionsItemSelected(item)

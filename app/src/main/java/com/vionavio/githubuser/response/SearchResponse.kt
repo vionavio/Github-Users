@@ -6,3 +6,8 @@ import com.vionavio.githubuser.model.User
 data class SearchResponse (
     @SerializedName("items") val items: List<User> = mutableListOf()
 )
+
+data class ResponseUser (
+
+    @field:SerializedName("items") val items: List<User>? = null
+)

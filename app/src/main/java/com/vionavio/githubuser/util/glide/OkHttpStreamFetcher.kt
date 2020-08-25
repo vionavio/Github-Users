@@ -1,4 +1,4 @@
-package com.vionavio.githubuser.util
+package com.vionavio.githubuser.util.glide
 
 import android.annotation.SuppressLint
 import android.util.Log

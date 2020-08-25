@@ -8,6 +8,15 @@
     <string name="detail_user">Detail Benutzer</string>
     <string name="repository">Repository</string>
     <string name="share">Aktie</string>
+    <string name="favourite">Lieblings</string>
+    <string name="alarm">Alarm einstellen</string>
+    <string name="language">Sprache ändern</string>
     <string name="check_profile">Hey, überprüfe dieses profil von</string>
     <string name="on">auf</string>
+    <string name="reminder">Erinnerung um 09.00 Uhr</string>
+    <string name="reminder_title">Erinnerung</string>
+    <string name="notification">Benachrichtigung</string>
+    <string name="notification_text">Lassen Sie uns beliebte Benutzer auf Github finden!</string>
+    <string name="off_alarm_set">Erinnerung ist ausgeschaltet</string>
+    <string name="alarm_set">Die Erinnerung ist auf 09.00 Uhr eingestellt</string>
 </resources>

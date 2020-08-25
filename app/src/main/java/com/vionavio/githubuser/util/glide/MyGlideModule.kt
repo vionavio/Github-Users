@@ -1,4 +1,4 @@
-package com.vionavio.githubuser.util
+package com.vionavio.githubuser.util.glide
 
 import android.content.Context
 import com.bumptech.glide.Glide
@@ -17,10 +17,12 @@ class MyGlideModule : AppGlideModule() {
         glide: Glide,
         registry: Registry
     ) {
-        val okHttpClient: OkHttpClient = UnsafeOkHttpClient.unsafeOkHttpClient
+        val okHttpClient: OkHttpClient =
+            UnsafeOkHttpClient.unsafeOkHttpClient
         registry.replace(
             GlideUrl::class.java,
-            InputStream::class.java, OkHttpUrlLoader.Factory(okHttpClient)
+            InputStream::class.java,
+            OkHttpUrlLoader.Factory(okHttpClient)
         )
     }
 }

@@ -7,7 +7,17 @@
     <string name="detail_user">Detail User</string>
     <string name="repository">Repository</string>
     <string name="share">Share</string>
+    <string name="alarm">Setting Alarm</string>
+    <string name="language">Change Language</string>
+    <string name="favourite">Favourite</string>s
     <string name="check_profile">Hey, check this profile of</string>
     <string name="on">on</string>
+    <string name="reminder">Reminder at 09.00 AM</string>
+    <string name="reminder_title">Reminder</string>
+    <string name="notification">Notification</string>
+    <string name="notification_text">Let\'s find popular user on Github!</string>
+    <string name="off_alarm_set">Reminder is turned off</string>
+    <string name="alarm_set">Reminder is set at 09.00 AM</string>
+
 
 </resources>

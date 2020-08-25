@@ -1,4 +1,4 @@
-package com.vionavio.githubuser.util
+package com.vionavio.githubuser.util.glide
 
 import com.bumptech.glide.load.Options
 import com.bumptech.glide.load.model.GlideUrl
@@ -20,7 +20,9 @@ class OkHttpUrlLoader // Public API.
     override fun buildLoadData(
         model: GlideUrl, width: Int, height: Int, options: Options
     ): LoadData<InputStream>? {
-        return LoadData(model, OkHttpStreamFetcher(client, model))
+        return LoadData(model,
+            OkHttpStreamFetcher(client, model)
+        )
     }
 
     class Factory

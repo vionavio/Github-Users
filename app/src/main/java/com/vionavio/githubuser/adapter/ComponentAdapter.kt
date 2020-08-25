@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.model.User
-import com.vionavio.githubuser.util.GlideApp
+import com.vionavio.githubuser.util.glide.GlideApp
 import kotlinx.android.synthetic.main.item_list.view.*
 
 class ComponentAdapter(
