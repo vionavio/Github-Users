@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.model.User
 import com.vionavio.githubuser.util.glide.GlideApp
-import com.vionavio.githubuser.view.DetailActivity
 import kotlinx.android.synthetic.main.item_list.view.*
 
 class FavoriteAdapter(

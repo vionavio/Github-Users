@@ -1,4 +1,4 @@
-package com.vionavio.githubuser.db
+package com.vionavio.consumerapp.db
 
 import android.net.Uri
 import android.provider.BaseColumns
@@ -14,7 +14,7 @@ object DatabaseContract {
             const val USERNAME = "username"
             const val AVATAR = "avatar"
 
-            var CONTENT_URI : Uri = Uri.Builder().scheme(SCHEME)
+            val CONTENT_URI : Uri = Uri.Builder().scheme(SCHEME)
                 .authority(AUTHORITY)
                 .appendPath(TABLE_NAME)
                 .build()

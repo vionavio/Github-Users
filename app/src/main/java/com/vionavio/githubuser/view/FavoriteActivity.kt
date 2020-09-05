@@ -1,8 +1,11 @@
 package com.vionavio.githubuser.view
 
 import android.content.Intent
+import android.database.ContentObserver
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
@@ -10,8 +13,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vionavio.githubuser.R
-import com.vionavio.githubuser.adapter.ComponentAdapter
 import com.vionavio.githubuser.adapter.FavoriteAdapter
+import com.vionavio.githubuser.db.DatabaseContract.UserColumns.Companion.CONTENT_URI
 import com.vionavio.githubuser.db.MappingHelper
 import com.vionavio.githubuser.db.UserHelper
 import com.vionavio.githubuser.model.User
@@ -36,7 +39,17 @@ class FavoriteActivity : AppCompatActivity() {
         helper.open()
 
         initView()
-        loadUsersAsync()
+
+        val handlerThread = HandlerThread("DataObserver")
+        handlerThread.start()
+        val handler = Handler(handlerThread.looper)
+
+        val myObserver = object : ContentObserver(handler){
+            override fun onChange(selfChange: Boolean) {
+                loadUsersAsync()
+            }
+        }
+        contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
     }
 
     private fun initView(){
@@ -116,8 +129,6 @@ class FavoriteActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
 
     override fun onResume() {
         super.onResume()
