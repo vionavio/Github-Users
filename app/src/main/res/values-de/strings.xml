@@ -19,4 +19,9 @@
     <string name="notification_text">Lassen Sie uns beliebte Benutzer auf Github finden!</string>
     <string name="off_alarm_set">Erinnerung ist ausgeschaltet</string>
     <string name="alarm_set">Die Erinnerung ist auf 09.00 Uhr eingestellt</string>
+    <string name="delete">löschen</string>
+    <string name="yes">ja</string>
+    <string name="no">nein</string>
+    <string name="alert">Warnung</string>
+    <string name="message">Möchten Sie den Benutzer aus der Favoritenliste entfernen?</string>
 </resources>

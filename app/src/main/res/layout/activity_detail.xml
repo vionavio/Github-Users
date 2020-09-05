@@ -8,13 +8,13 @@
     android:orientation="vertical"
     tools:context=".view.DetailActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkBrown"
-        android:elevation="10dp"
-        app:titleTextColor="@color/brownLight" />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/detail_toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/darkBrown"-->
+<!--        android:elevation="10dp"-->
+<!--        app:titleTextColor="@color/brownLight" />-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -200,6 +200,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
+        android:background="@color/middleBrown2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabTextColor="@color/brown" />

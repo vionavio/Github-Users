@@ -21,7 +21,7 @@
         android:icon="@drawable/ic_alarm"
         app:showAsAction="ifRoom"
         android:visible="false"
-        android:title="@string/share"/>
+        android:title="@string/alarm"/>
 
     <item
         android:id="@+id/action_language"

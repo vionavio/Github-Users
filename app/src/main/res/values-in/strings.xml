@@ -19,4 +19,9 @@
     <string name="notification_text">Mari temukan pengguna populer di Github!</string>
     <string name="off_alarm_set">Pengingat dimatikan</string>
     <string name="alarm_set">Pengingat disetel pada pukul 09.00</string>
+    <string name="delete">hapus</string>
+    <string name="yes">ya</string>
+    <string name="no">tidak</string>
+    <string name="alert">Peringatan</string>
+    <string name="message">Apakah anda ingin menghapus user dari daftar favorite</string>
 </resources>

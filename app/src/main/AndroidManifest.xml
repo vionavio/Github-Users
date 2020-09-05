@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/SearchTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".view.FavoriteActivity"></activity>
         <activity android:name=".view.DetailActivity" />
         <activity android:name=".view.SettingPreferenceActivity" />
         <activity android:name=".view.MainActivity">

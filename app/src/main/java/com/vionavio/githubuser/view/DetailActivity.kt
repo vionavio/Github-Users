@@ -1,17 +1,24 @@
 package com.vionavio.githubuser.view
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.adapter.SectionAdapter
 import com.vionavio.githubuser.connection.Client
+import com.vionavio.githubuser.db.DatabaseContract.UserColumns.Companion.AVATAR
+import com.vionavio.githubuser.db.DatabaseContract.UserColumns.Companion.USERNAME
+import com.vionavio.githubuser.db.UserHelper
 import com.vionavio.githubuser.model.User
 import com.vionavio.githubuser.util.glide.GlideApp
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -23,6 +30,10 @@ import retrofit2.Response
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var adapter: SectionAdapter
+    private lateinit var userHelper: UserHelper
+    private var isFavorite: Boolean = false
+    private lateinit var menuItem: Menu
+    private lateinit var userName : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +44,32 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        setSupportActionBar(detail_toolbar)
+
         supportActionBar?.title = getString(R.string.detail_user)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        detail_toolbar.setNavigationOnClickListener {
-            startActivity(
-                Intent(
-                    applicationContext,
-                    MainActivity::class.java
-                )
-            )
-        }
-        val userName = getIntentData()
+        userName = getIntentData()
         getDetailUser(userName)
 
         adapter =
             SectionAdapter(supportFragmentManager)
         view_pager.adapter = adapter
+
+        userHelper = UserHelper.getInstance(applicationContext)
+        userHelper.open()
+        favoriteState()
+    }
+
+    private fun favoriteState() {
+        userName = getIntentData()
+        val result = userHelper.queryByLogin(userName)
+        val favorite = (1 .. result.count).map {
+            result.apply {
+                moveToNext()
+                getInt(result.getColumnIndexOrThrow(USERNAME))
+            }
+        }
+        if (favorite.isNotEmpty()) isFavorite = true
     }
 
     private fun getIntentData(): String {
@@ -72,7 +90,6 @@ class DetailActivity : AppCompatActivity() {
                     )
                 }
             }
-
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
             }
         })
@@ -141,6 +158,10 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        if (menu != null) {
+            menuItem = menu
+        }
+        setFavorite()
         return true
     }
 
@@ -163,11 +184,15 @@ class DetailActivity : AppCompatActivity() {
                 true
             }
             R.id.action_favourite -> {
-                Toast.makeText(this, "Anda klik favorite", Toast.LENGTH_SHORT).show()
+                val user = intent.getParcelableExtra<User>(EXTRA_USER)
+                if (isFavorite) removeFavoriteUser() else addFavoriteUser(user)
+
+                isFavorite = !isFavorite
+                setFavorite()
                 true
             }
             R.id.action_alarm -> {
-                Toast.makeText(this, "Anda klik alarm", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@DetailActivity, SettingPreferenceActivity::class.java))
                 true
             }
             R.id.action_language -> {
@@ -176,6 +201,13 @@ class DetailActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun setFavorite() {
+
+        if (isFavorite) {
+            menuItem.getItem(1)?.icon = ContextCompat.getDrawable(this, R.drawable.favorite)
+        } else menuItem.getItem(1)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_favorite)
     }
 
     private fun shareUser() {
@@ -192,5 +224,44 @@ class DetailActivity : AppCompatActivity() {
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    private fun removeFavoriteUser() {
+        userName = getIntentData()
+        try {
+            val result = userHelper.deleteByUsername(userName)
+            val text = resources.getString(R.string.delete)
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+            Log.d("on:Remove..", result.toString())
+        } catch (e: SQLiteConstraintException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun addFavoriteUser(user: User?) {
+        if (user != null) {
+            val values = ContentValues()
+            values.put(USERNAME, user.username)
+            values.put(AVATAR, user.avatar)
+            val result = userHelper.insert(values)
+            showResult(result)
+        }
+    }
+
+    private fun showResult(result: Long) {
+        when {
+            result > 0 -> {
+                Toast.makeText(this, "Berhasil menambah data", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Toast.makeText(this, "Gagal menambah data", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
     }
 }

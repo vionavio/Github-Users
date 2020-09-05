@@ -18,6 +18,11 @@
     <string name="notification_text">Let\'s find popular user on Github!</string>
     <string name="off_alarm_set">Reminder is turned off</string>
     <string name="alarm_set">Reminder is set at 09.00 AM</string>
+    <string name="delete">delete</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="alert">Warning</string>
+    <string name="message">Do you want to remove the user from the favorite list</string>
 
 
 </resources>

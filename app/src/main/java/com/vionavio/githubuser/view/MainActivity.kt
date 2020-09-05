@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
 
     private fun initViewConfigure() {
 
-        setSupportActionBar(detail_toolbar)
-        supportActionBar?.title = getString(R.string.app_name)
 
         adapter =
             ComponentAdapter(onClick = { user: User ->
@@ -118,7 +116,7 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_favourite -> {
-                Toast.makeText(this, "Anda klik favorite", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, FavoriteActivity::class.java))
                 true
             }
             R.id.action_alarm -> {
@@ -131,10 +129,5 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
     }
 }

@@ -8,13 +8,13 @@
     android:orientation="vertical"
     tools:context=".view.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkBrown"
-        android:elevation="10dp"
-        app:titleTextColor="@color/brownLight" />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/detail_toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/darkBrown"-->
+<!--        android:elevation="10dp"-->
+<!--        app:titleTextColor="@color/brownLight" />-->
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/LoginTextInputLayoutStyle"

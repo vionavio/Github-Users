@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="SearchTheme" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+    <style name="SearchTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/darkBrown</item>
         <item name="colorPrimaryDark">@color/brown</item>
         <item name="colorAccent">@color/brown</item>
@@ -19,7 +19,7 @@
     </style>
 
     <style name="menu_item_color">
-        <item name="android:textColor">@color/middleBrown</item>
+        <item name="android:textColor">@color/darkBrown</item>
     </style>
 
 </resources>

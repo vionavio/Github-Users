@@ -1,6 +1,5 @@
 package com.vionavio.githubuser.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +12,12 @@ import com.vionavio.githubuser.util.glide.GlideApp
 import com.vionavio.githubuser.view.DetailActivity
 import kotlinx.android.synthetic.main.item_list.view.*
 
-class ComponentAdapter(
+class FavoriteAdapter(
     private val list: MutableList<User> = mutableListOf(),
-    private val onClick: ((User) -> Unit)? = null
+    private val onClick: ((User) -> Unit)? = null,
+    private val onLongClick: ((User, Int) -> Unit)? = null
 ) :
-    RecyclerView.Adapter<ComponentAdapter.VHolder>() {
+    RecyclerView.Adapter<FavoriteAdapter.VHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
         return VHolder(view)
@@ -57,10 +57,26 @@ class ComponentAdapter(
                 itemView.component_name.text = user?.username
                 itemView.setOnClickListener {
                     if (user != null) {
-                        val intent = Intent (context, DetailActivity::class.java)
-                        intent.putExtra(DetailActivity.EXTRA_USER, user)
-                        context?.startActivity(intent)
+                        onClick?.invoke(user)
                     }
+                }
+
+                itemView.setOnLongClickListener {
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle(R.string.alert)
+                    builder.setMessage(R.string.message)
+
+                    builder.setPositiveButton(R.string.yes) { _, _ ->
+                        if (user != null) {
+                            onLongClick?.invoke(user, adapterPosition)
+                        }
+                        Toast.makeText(context, R.string.yes, Toast.LENGTH_SHORT).show()
+                    }
+                    builder.setNegativeButton(R.string.no) { _, _ ->
+                        Toast.makeText(context, R.string.no, Toast.LENGTH_SHORT).show()
+                    }
+                    builder.show()
+                    return@setOnLongClickListener true
                 }
             }
         }
