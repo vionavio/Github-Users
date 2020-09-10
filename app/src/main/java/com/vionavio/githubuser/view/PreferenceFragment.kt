@@ -18,13 +18,14 @@ class PreferenceFragment : PreferenceFragmentCompat() {
         switchPreference = findPreference(resources.getString(R.string.notification))!!
 
         switchPreference.onPreferenceChangeListener = Preference.OnPreferenceChangeListener{ _, _->
+            val id = AlarmReceiver.NOTIFICATION_ID
             if (switchPreference.isChecked) {
-                activity?.let { alarmReceiver.cancelAlarm(it) }
+                activity?.let { alarmReceiver.cancelAlarm(requireContext(), id) }
                 val text = resources.getString(R.string.off_alarm_set)
                 Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
                 switchPreference.isChecked = false
             } else {
-                activity?.let { alarmReceiver.setRepeatAlarm(it) }
+                activity?.let { alarmReceiver.setRepeatAlarm(requireContext(), id) }
                 val text = resources.getString(R.string.alarm_set)
                 Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
                 switchPreference.isChecked = true

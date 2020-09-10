@@ -4,8 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.model.User
@@ -14,8 +12,7 @@ import com.vionavio.githubuser.view.DetailActivity
 import kotlinx.android.synthetic.main.item_list.view.*
 
 class ComponentAdapter(
-    private val list: MutableList<User> = mutableListOf(),
-    private val onClick: ((User) -> Unit)? = null
+    private val list: MutableList<User> = mutableListOf()
 ) :
     RecyclerView.Adapter<ComponentAdapter.VHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VHolder {
@@ -37,13 +34,6 @@ class ComponentAdapter(
         }
     }
 
-    fun removeItem(position: Int) {
-        this.list.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, this.list.size)
-    }
-
-
     @Suppress("DEPRECATION")
     inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(user: User?) {
@@ -57,7 +47,7 @@ class ComponentAdapter(
                 itemView.component_name.text = user?.username
                 itemView.setOnClickListener {
                     if (user != null) {
-                        val intent = Intent (context, DetailActivity::class.java)
+                        val intent = Intent(context, DetailActivity::class.java)
                         intent.putExtra(DetailActivity.EXTRA_USER, user)
                         context?.startActivity(intent)
                     }

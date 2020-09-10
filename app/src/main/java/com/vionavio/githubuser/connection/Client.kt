@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Client {
 
     companion object {
-
         private val retrofit: Retrofit by lazy {
             Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

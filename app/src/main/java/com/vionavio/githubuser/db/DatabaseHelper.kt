@@ -13,14 +13,14 @@ internal class DatabaseHelper(
 ) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_NAME = "dbuserapp"
+        private const val DATABASE_NAME = "githubuserdb"
         private const val DATABASE_VERSION = 1
-        //Query untuk Create table
-        private val SQL_CREATE_TABLE_USER =
+
+        private const val SQL_CREATE_TABLE_USER =
             "CREATE TABLE $TABLE_NAME" +
                     " (${_ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " ${USERNAME} TEXT NOT NULL," +
-                    " ${AVATAR} TEXT NOT NULL)"
+                    " $USERNAME TEXT NOT NULL," +
+                    " $AVATAR TEXT NOT NULL)"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {

@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/SearchTheme"
         tools:ignore="AllowBackup">
-        <receiver android:name=".GithubUserWidget">
+        <receiver android:name=".widget.GithubUserWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

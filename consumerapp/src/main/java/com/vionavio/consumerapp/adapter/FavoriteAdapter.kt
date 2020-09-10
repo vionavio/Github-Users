@@ -10,7 +10,7 @@ import com.vionavio.consumerapp.model.User
 import kotlinx.android.synthetic.main.item_list.view.*
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.VHolder>() {
-    var list = ArrayList<User>()
+    var list : MutableList<User> = mutableListOf()
         set(mData) {
             if (mData.size > 0) {
                 this.list.clear()
@@ -29,7 +29,6 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.VHolder>() {
     override fun onBindViewHolder(holder: VHolder, position: Int) {
         holder.bind(list[position])
     }
-
 
     inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(user: User?) {

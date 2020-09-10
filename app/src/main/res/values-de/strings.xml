@@ -9,6 +9,7 @@
     <string name="repository">Repository</string>
     <string name="share">Aktie</string>
     <string name="favourite">Lieblings</string>
+    <string name="favourite_user">Lieblingsbenutzer</string>
     <string name="alarm">Alarm einstellen</string>
     <string name="language">Sprache ändern</string>
     <string name="check_profile">Hey, überprüfe dieses profil von</string>

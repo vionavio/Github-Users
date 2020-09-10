@@ -10,6 +10,7 @@
     <string name="alarm">Setting Alarm</string>
     <string name="language">Change Language</string>
     <string name="favourite">Favourite</string>s
+    <string name="favourite_user">Favourite User</string>s
     <string name="check_profile">Hey, check this profile of</string>
     <string name="on">on</string>
     <string name="reminder">Reminder at 09.00 AM</string>

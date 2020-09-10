@@ -14,7 +14,7 @@ object MappingHelper {
                 val id = getInt(getColumnIndexOrThrow(DatabaseContract.UserColumns._ID))
                 val username = getString(getColumnIndexOrThrow(DatabaseContract.UserColumns.USERNAME))
                 val avatar = getString(getColumnIndexOrThrow(DatabaseContract.UserColumns.AVATAR))
-                favoriteUserItemsList.add(User(id, username, avatar, null, null, null, null, null, null))
+                favoriteUserItemsList.add(User(id = id, username = username, avatar = avatar))
             }
         }
         return favoriteUserItemsList

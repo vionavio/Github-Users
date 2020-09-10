@@ -11,10 +11,11 @@
     <string name="alarm">Mengatur Alarm</string>
     <string name="language">Ubah Bahasa</string>
     <string name="favourite">Favorit</string>
+    <string name="favourite_user">Pengguna Favorit</string>
     <string name="check_profile">Hey, periksa profil ini</string>
     <string name="on">di</string>
     <string name="reminder">Pengingat pukul 09.00 pagi</string>
-    <string name="reminder_title">Pengingat</string>
+    <string name="reminder_title">sPengingat</string>
     <string name="notification">Pengingat</string>
     <string name="notification_text">Mari temukan pengguna populer di Github!</string>
     <string name="off_alarm_set">Pengingat dimatikan</string>

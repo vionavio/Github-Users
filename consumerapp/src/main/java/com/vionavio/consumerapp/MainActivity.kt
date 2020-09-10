@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initDataObserver()
+        initView()
+        loadUsersAsync()
+    }
+
+    private fun initDataObserver(){
         val handlerThread = HandlerThread("DataObserver")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
@@ -33,11 +39,7 @@ class MainActivity : AppCompatActivity() {
                 loadUsersAsync()
             }
         }
-
         contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
-
-        initView()
-        loadUsersAsync()
     }
 
     private fun initView(){
@@ -47,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         rv_favorite.setHasFixedSize(true)
         rv_favorite.adapter = adapter
     }
-
 
     private fun loadUsersAsync() {
         GlobalScope.launch(Dispatchers.Main) {

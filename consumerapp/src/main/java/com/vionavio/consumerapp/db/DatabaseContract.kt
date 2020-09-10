@@ -9,7 +9,7 @@ object DatabaseContract {
 
     internal class UserColumns: BaseColumns{
         companion object {
-            const val TABLE_NAME = "github_user"
+            private const val TABLE_NAME = "github_user"
             const val _ID = "_id"
             const val USERNAME = "username"
             const val AVATAR = "avatar"

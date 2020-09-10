@@ -85,12 +85,12 @@ class FavoriteActivity : AppCompatActivity() {
                 MappingHelper.mapCursorToArrayList(cursor)
             }
             progress_bar.visibility = View.INVISIBLE
-            val notes: ArrayList<User> = deferredNotes.await()
+            val notes: MutableList<User> = deferredNotes.await()
             addUsersToAdapter(notes)
         }
     }
 
-    private fun addUsersToAdapter(notes: ArrayList<User>) {
+    private fun addUsersToAdapter(notes: MutableList<User>) {
         when {
             notes.isNotEmpty() -> {
                 adapter.addAll(notes)

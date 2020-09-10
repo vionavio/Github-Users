@@ -2,12 +2,11 @@ package com.vionavio.githubuser.db
 
 import android.database.Cursor
 import com.vionavio.githubuser.model.User
-import java.util.ArrayList
 
 object MappingHelper {
 
-    fun mapCursorToArrayList(favoriteUserCursor: Cursor?): ArrayList<User> {
-        val favoriteUserItemsList = ArrayList<User>()
+    fun mapCursorToArrayList(favoriteUserCursor: Cursor?): MutableList<User> {
+        val favoriteUserItemsList = mutableListOf<User>()
 
         favoriteUserCursor?.apply {
             while (moveToNext()) {

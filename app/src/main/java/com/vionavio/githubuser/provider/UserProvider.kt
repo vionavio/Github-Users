@@ -31,10 +31,16 @@ class UserProvider : ContentProvider() {
         return true
     }
 
-    override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
+    override fun query(
+        uri: Uri,
+        projection: Array<String>?,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        sortOrder: String?
+    ): Cursor? {
         return when (sUriMatcher.match(uri)) {
             USER -> userHelper.queryAll()
-            USER_ID -> userHelper.queryByLogin(uri.lastPathSegment.toString())
+            USER_ID -> userHelper.queryByUsername(uri.lastPathSegment.toString())
             else -> null
         }
     }
@@ -44,7 +50,7 @@ class UserProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        val added : Long? = when(USER) {
+        val added: Long? = when (USER) {
             sUriMatcher.match(uri) -> values?.let { userHelper.insert(it) }
             else -> 0
         }
@@ -60,7 +66,7 @@ class UserProvider : ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        val deleted : Int = when(USER_ID) {
+        val deleted: Int = when (USER_ID) {
             sUriMatcher.match(uri) -> userHelper.deleteByUsername(uri.lastPathSegment.toString())
             else -> 0
         }

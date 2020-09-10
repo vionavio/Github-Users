@@ -42,7 +42,6 @@ class FavoriteAdapter(
         notifyItemRangeChanged(position, this.list.size)
     }
 
-
     @Suppress("DEPRECATION")
     inner class VHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(user: User?) {

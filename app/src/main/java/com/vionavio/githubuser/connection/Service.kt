@@ -1,7 +1,6 @@
 package com.vionavio.githubuser.connection
 
 import com.vionavio.githubuser.model.User
-import com.vionavio.githubuser.response.ResponseUser
 import com.vionavio.githubuser.response.SearchResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -10,7 +9,7 @@ import retrofit2.http.*
 interface Service {
 
     @GET("users")
-    fun getUsers() : Call<ResponseUser>
+    fun getUsers() : Call<SearchResponse>
 
     @GET("search/users")
     fun getSearch(@Query("q") q: String): Call<SearchResponse>

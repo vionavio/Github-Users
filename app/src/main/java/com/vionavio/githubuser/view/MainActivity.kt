@@ -12,7 +12,6 @@ import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -57,13 +56,8 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
 
     private fun initViewConfigure() {
 
-
         adapter =
-            ComponentAdapter(onClick = { user: User ->
-                val intent = Intent(this, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_USER, user)
-                startActivity(intent)
-            })
+            ComponentAdapter()
         rv_user_search.layoutManager = LinearLayoutManager(this)
         rv_user_search.itemAnimator = DefaultItemAnimator()
         rv_user_search.adapter = adapter

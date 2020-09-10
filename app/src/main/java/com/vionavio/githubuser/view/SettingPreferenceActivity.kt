@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.vionavio.githubuser.R
 
-class SettingPreferenceActivity: AppCompatActivity() {
+class SettingPreferenceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting_preference)
@@ -15,7 +15,7 @@ class SettingPreferenceActivity: AppCompatActivity() {
             .commit()
     }
 
-    private fun initView(){
+    private fun initView() {
         supportActionBar?.title = getString(R.string.reminder_title)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.adapter.SectionAdapter
 import com.vionavio.githubuser.connection.Client
@@ -21,6 +22,7 @@ import com.vionavio.githubuser.db.DatabaseContract.UserColumns.Companion.USERNAM
 import com.vionavio.githubuser.db.UserHelper
 import com.vionavio.githubuser.model.User
 import com.vionavio.githubuser.util.glide.GlideApp
+import com.vionavio.githubuser.viewmodel.ViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,6 +36,7 @@ class DetailActivity : AppCompatActivity() {
     private var isFavorite: Boolean = false
     private lateinit var menuItem: Menu
     private lateinit var userName : String
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +54,11 @@ class DetailActivity : AppCompatActivity() {
         userName = getIntentData()
         getDetailUser(userName)
 
-        adapter =
-            SectionAdapter(supportFragmentManager)
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            ViewModel::class.java
+        )
+
+        adapter = SectionAdapter(supportFragmentManager)
         view_pager.adapter = adapter
 
         userHelper = UserHelper.getInstance(applicationContext)
@@ -62,7 +68,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun favoriteState() {
         userName = getIntentData()
-        val result = userHelper.queryByLogin(userName)
+        val result = userHelper.queryByUsername(userName)
         val favorite = (1 .. result.count).map {
             result.apply {
                 moveToNext()
@@ -84,9 +90,7 @@ class DetailActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val list = ArrayList<User>(response.body().orEmpty())
                     adapter.addFragment(
-                        ComponentFragment.newInstance(
-                            list
-                        ), title
+                        ComponentFragment.newInstance(list), title
                     )
                 }
             }
@@ -108,7 +112,6 @@ class DetailActivity : AppCompatActivity() {
                     )
                 }
             }
-
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
             }
         })
