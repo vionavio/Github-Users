@@ -22,6 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/SearchTheme"
         tools:ignore="AllowBackup">
+        <activity android:name=".view.MainActivity" />
+
         <receiver android:name=".widget.GithubUserWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -36,8 +38,9 @@
         <activity android:name=".view.DetailActivity" />
         <activity android:name=".view.SettingPreferenceActivity" />
         <activity
-            android:name=".view.MainActivity"
-            android:launchMode="singleTop">
+            android:name=".splashscreen.Splashscreen"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -29,6 +29,4 @@
     <string name="success_delete">Data success to delete</string>
     <string name="failed_add_data">Failed to add data</string>
     <string name="success_add_data">Successfully added data</string>
-
-
 </resources>
