@@ -1,25 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/drop_shadow">
+
     <LinearLayout
         android:id="@+id/appwidget_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables,UselessParent">
+
         <ImageView
-            android:layout_gravity="center"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@mipmap/github"
-            android:contentDescription="@string/app_name"/>
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/github" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/darkBrown"
-            android:text="@string/favourite_user"/>
+            android:text="@string/favourite_user"
+            android:textColor="@color/darkBrown" />
     </LinearLayout>
-
-
 
 </RelativeLayout>
