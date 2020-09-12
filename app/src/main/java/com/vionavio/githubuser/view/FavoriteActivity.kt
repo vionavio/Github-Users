@@ -44,7 +44,7 @@ class FavoriteActivity : AppCompatActivity() {
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
 
-        val myObserver = object : ContentObserver(handler){
+        val myObserver = object : ContentObserver(handler) {
             override fun onChange(selfChange: Boolean) {
                 loadUsersAsync()
             }
@@ -52,14 +52,13 @@ class FavoriteActivity : AppCompatActivity() {
         contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
     }
 
-    private fun initView(){
+    private fun initView() {
 
-        adapter = FavoriteAdapter(onClick = {
-            user: User ->
+        adapter = FavoriteAdapter(onClick = { user: User ->
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra(DetailActivity.EXTRA_USER, user)
             startActivity(intent)
-        },onLongClick = { user, position ->
+        }, onLongClick = { user, position ->
             deleteUser(user, position)
         })
         rv_favorite.layoutManager = LinearLayoutManager(this)
@@ -71,9 +70,9 @@ class FavoriteActivity : AppCompatActivity() {
         val result = helper.deleteByUsername(username = user.username.toString())
         if (result > 0) {
             adapter.removeItem(position)
-            Toast.makeText(this, "Data berhasil dihapus", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.success_delete, Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(this, "Data gagal dihapus", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.failed_delete, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -97,7 +96,7 @@ class FavoriteActivity : AppCompatActivity() {
             }
             else -> {
                 adapter.addAll(emptyList())
-                Toast.makeText(this@FavoriteActivity, "Tidak ada data saat ini", Toast.LENGTH_LONG)
+                Toast.makeText(this@FavoriteActivity, R.string.no_data, Toast.LENGTH_LONG)
                     .show()
             }
         }

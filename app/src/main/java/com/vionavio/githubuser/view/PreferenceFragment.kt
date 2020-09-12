@@ -14,23 +14,23 @@ class PreferenceFragment : PreferenceFragmentCompat() {
         addPreferencesFromResource(R.xml.preferences)
 
         val alarmReceiver = AlarmReceiver()
-
         switchPreference = findPreference(resources.getString(R.string.notification))!!
 
-        switchPreference.onPreferenceChangeListener = Preference.OnPreferenceChangeListener{ _, _->
-            val id = AlarmReceiver.NOTIFICATION_ID
-            if (switchPreference.isChecked) {
-                activity?.let { alarmReceiver.cancelAlarm(requireContext(), id) }
-                val text = resources.getString(R.string.off_alarm_set)
-                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
-                switchPreference.isChecked = false
-            } else {
-                activity?.let { alarmReceiver.setRepeatAlarm(requireContext(), id) }
-                val text = resources.getString(R.string.alarm_set)
-                Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
-                switchPreference.isChecked = true
+        switchPreference.onPreferenceChangeListener =
+            Preference.OnPreferenceChangeListener { _, _ ->
+                val id = AlarmReceiver.NOTIFICATION_ID
+                if (switchPreference.isChecked) {
+                    activity?.let { alarmReceiver.cancelAlarm(requireContext(), id) }
+                    val text = resources.getString(R.string.off_alarm_set)
+                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
+                    switchPreference.isChecked = false
+                } else {
+                    activity?.let { alarmReceiver.setRepeatAlarm(requireContext(), id) }
+                    val text = resources.getString(R.string.alarm_set)
+                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
+                    switchPreference.isChecked = true
+                }
+                false
             }
-            false
-        }
     }
 }

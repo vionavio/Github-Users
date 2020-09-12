@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="middleBrown">#F7E2C6</color>
+    <color name="middleBrown2">#F2DBBB</color>
+    <color name="brownLight">#FBEFDF</color>
+    <color name="darkBrown">#574539</color>
+    <color name="brown">#806A5C</color>
+
+    <color name="stroke_color" tools:override="true">@color/brown</color>
 </resources>

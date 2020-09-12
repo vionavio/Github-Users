@@ -24,8 +24,11 @@
     <string name="no">no</string>
     <string name="alert">Warning</string>
     <string name="message">Do you want to remove the user from the favorite list</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="no_data">No data</string>
+    <string name="failed_delete">Data failed to delete</string>
+    <string name="success_delete">Data success to delete</string>
+    <string name="failed_add_data">Failed to add data</string>
+    <string name="success_add_data">Successfully added data</string>
 
 
 </resources>

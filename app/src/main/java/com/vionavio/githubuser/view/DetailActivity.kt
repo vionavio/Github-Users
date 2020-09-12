@@ -1,18 +1,17 @@
 package com.vionavio.githubuser.view
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.vionavio.githubuser.R
 import com.vionavio.githubuser.adapter.SectionAdapter
@@ -35,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var userHelper: UserHelper
     private var isFavorite: Boolean = false
     private lateinit var menuItem: Menu
-    private lateinit var userName : String
+    private lateinit var userName: String
     private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +57,20 @@ class DetailActivity : AppCompatActivity() {
             ViewModel::class.java
         )
 
+        viewModel.following.observe(this@DetailActivity, Observer { listUser: List<User>? ->
+            adapter.addFragment(
+                ComponentFragment.newInstance(listUser as ArrayList<User>),
+                getString(R.string.following)
+            )
+        })
+
+        viewModel.followers.observe(this@DetailActivity, Observer { listUser: List<User>? ->
+            adapter.addFragment(
+                ComponentFragment.newInstance(listUser as ArrayList<User>),
+                getString(R.string.followers)
+            )
+        })
+
         adapter = SectionAdapter(supportFragmentManager)
         view_pager.adapter = adapter
 
@@ -69,7 +82,7 @@ class DetailActivity : AppCompatActivity() {
     private fun favoriteState() {
         userName = getIntentData()
         val result = userHelper.queryByUsername(userName)
-        val favorite = (1 .. result.count).map {
+        val favorite = (1..result.count).map {
             result.apply {
                 moveToNext()
                 getInt(result.getColumnIndexOrThrow(USERNAME))
@@ -83,61 +96,25 @@ class DetailActivity : AppCompatActivity() {
         return user?.username ?: ""
     }
 
-    private fun getFollowing(userName: String, title: String) {
-        val call = Client.service.getFollowing(userName)
-        call.enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                if (response.isSuccessful) {
-                    val list = ArrayList<User>(response.body().orEmpty())
-                    adapter.addFragment(
-                        ComponentFragment.newInstance(list), title
-                    )
-                }
-            }
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
-            }
-        })
-    }
-
-    private fun getFollowers(userName: String, title: String) {
-        val call = Client.service.getFollowers(userName)
-        call.enqueue(object : Callback<List<User>> {
-            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                if (response.isSuccessful) {
-                    val listUser = ArrayList<User>(response.body().orEmpty())
-                    adapter.addFragment(
-                        ComponentFragment.newInstance(
-                            listUser
-                        ), title
-                    )
-                }
-            }
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
-            }
-        })
-    }
-
     private fun getDetailUser(userName: String) {
         val call = Client.service.getDetailUser(userName)
         call.enqueue(object : Callback<User> {
-            override fun onFailure(call: Call<User>, t: Throwable) {
-            }
+            override fun onFailure(call: Call<User>, t: Throwable) {}
 
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {
                     val user = response.body()
                     initDetailUser(user)
-
-                    getFollowing(userName, " ${getString(R.string.following)}")
-                    getFollowers(userName, " ${getString(R.string.followers)}")
+                    viewModel.getFollowing(userName)
+                    viewModel.getFollowers(userName)
                 }
             }
         })
     }
 
-    @SuppressLint("SetTextI18n")
     private fun initDetailUser(user: User?) {
         tv_name.text = user?.name
+        tv_username.text = user?.username
         tv_location.text = user?.location
         if (user?.location == null) ico_location.visibility = View.GONE
         tv_company.text = user?.company
@@ -232,11 +209,8 @@ class DetailActivity : AppCompatActivity() {
     private fun removeFavoriteUser() {
         userName = getIntentData()
         try {
-            val result = userHelper.deleteByUsername(userName)
             val text = resources.getString(R.string.delete)
             Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-
-            Log.d("on:Remove..", result.toString())
         } catch (e: SQLiteConstraintException) {
             e.printStackTrace()
         }
@@ -255,10 +229,10 @@ class DetailActivity : AppCompatActivity() {
     private fun showResult(result: Long) {
         when {
             result > 0 -> {
-                Toast.makeText(this, "Berhasil menambah data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.success_add_data, Toast.LENGTH_SHORT).show()
             }
             else -> {
-                Toast.makeText(this, "Gagal menambah data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.failed_add_data, Toast.LENGTH_SHORT).show()
             }
         }
     }

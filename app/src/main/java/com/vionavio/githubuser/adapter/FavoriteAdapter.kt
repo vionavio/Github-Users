@@ -3,7 +3,6 @@ package com.vionavio.githubuser.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.vionavio.githubuser.R
@@ -68,11 +67,8 @@ class FavoriteAdapter(
                         if (user != null) {
                             onLongClick?.invoke(user, adapterPosition)
                         }
-                        Toast.makeText(context, R.string.yes, Toast.LENGTH_SHORT).show()
                     }
-                    builder.setNegativeButton(R.string.no) { _, _ ->
-                        Toast.makeText(context, R.string.no, Toast.LENGTH_SHORT).show()
-                    }
+                    builder.setNegativeButton(R.string.no) { _, _ -> }
                     builder.show()
                     return@setOnLongClickListener true
                 }

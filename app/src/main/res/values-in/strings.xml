@@ -23,6 +23,11 @@
     <string name="delete">hapus</string>
     <string name="yes">ya</string>
     <string name="no">tidak</string>
+    <string name="no_data">Tidak ada data saat ini</string>
     <string name="alert">Peringatan</string>
+    <string name="failed_delete">Data gagal dihapus</string>
+    <string name="success_delete">Data berhasil dihapus</string>
     <string name="message">Apakah anda ingin menghapus user dari daftar favorite</string>
+    <string name="failed_add_data">Gagal menambah data</string>
+    <string name="success_add_data">Berhasil menambah data</string>
 </resources>

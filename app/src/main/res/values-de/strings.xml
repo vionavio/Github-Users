@@ -24,5 +24,10 @@
     <string name="yes">ja</string>
     <string name="no">nein</string>
     <string name="alert">Warnung</string>
+    <string name="no_data">Derzeit keine Daten</string>
     <string name="message">Möchten Sie den Benutzer aus der Favoritenliste entfernen?</string>
+    <string name="failed_delete">Daten konnten nicht gelöscht werden</string>
+    <string name="success_delete">Daten erfolgreich gelöscht</string>
+    <string name="failed_add_data">Daten konnten nicht hinzugefügt werden</string>
+    <string name="success_add_data">Daten erfolgreich hinzugefügt</string>
 </resources>

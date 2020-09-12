@@ -18,7 +18,7 @@ class ComponentFragment : Fragment() {
     private var userList: MutableList<User>? = mutableListOf()
 
     companion object {
-        fun newInstance( array: ArrayList<User>): ComponentFragment {
+        fun newInstance(array: ArrayList<User>): ComponentFragment {
             return ComponentFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(PARAMS, array)
@@ -37,7 +37,6 @@ class ComponentFragment : Fragment() {
         arguments.let {
             userList = it?.getParcelableArrayList(PARAMS)
         }
-
         view.rv_list_item.layoutManager = LinearLayoutManager(requireContext())
         view.rv_list_item.itemAnimator = DefaultItemAnimator()
         view.rv_list_item.adapter =

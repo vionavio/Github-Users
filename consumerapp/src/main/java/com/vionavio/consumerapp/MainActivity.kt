@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity() {
         loadUsersAsync()
     }
 
-    private fun initDataObserver(){
+    private fun initDataObserver() {
         val handlerThread = HandlerThread("DataObserver")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
 
-        val myObserver = object : ContentObserver(handler){
+        val myObserver = object : ContentObserver(handler) {
             override fun onChange(selfChange: Boolean) {
                 loadUsersAsync()
             }
@@ -42,9 +42,8 @@ class MainActivity : AppCompatActivity() {
         contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
     }
 
-    private fun initView(){
+    private fun initView() {
         adapter = FavoriteAdapter()
-
         rv_favorite.layoutManager = LinearLayoutManager(this)
         rv_favorite.setHasFixedSize(true)
         rv_favorite.adapter = adapter
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 adapter.list = favorites
             } else {
                 adapter.list = ArrayList()
-                Snackbar.make(rv_favorite, "No data", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(rv_favorite, R.string.no_data, Snackbar.LENGTH_LONG).show()
             }
         }
     }

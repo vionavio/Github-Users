@@ -56,8 +56,7 @@ class MainActivity : AppCompatActivity(), TextView.OnEditorActionListener {
 
     private fun initViewConfigure() {
 
-        adapter =
-            ComponentAdapter()
+        adapter = ComponentAdapter()
         rv_user_search.layoutManager = LinearLayoutManager(this)
         rv_user_search.itemAnimator = DefaultItemAnimator()
         rv_user_search.adapter = adapter

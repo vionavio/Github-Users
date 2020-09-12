@@ -29,7 +29,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val id = intent?.getIntExtra(EXTRA_TYPE, -1)
         if (id == NOTIFICATION_ID) {
             if (context != null) {
-                showAlarmNotification(context, id)
+                showAlarmNotification(context)
             }
         }
     }
@@ -67,7 +67,7 @@ class AlarmReceiver : BroadcastReceiver() {
         alarmManager.cancel(pendingIntent)
     }
 
-    private fun showAlarmNotification(context: Context, idNotif: Int) {
+    private fun showAlarmNotification(context: Context) {
         val pendingIntent =
             PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), 0)
 

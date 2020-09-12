@@ -17,8 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="4dp"
-            android:background="@color/brownLight">
+            android:background="@color/brownLight"
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/component_avatar"
@@ -26,8 +26,8 @@
                 android:layout_height="65dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@mipmap/ic_launcher"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/component_name"
@@ -37,7 +37,7 @@
                 android:layout_marginStart="16dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/brown"
+                android:textColor="@color/darkBrown"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/component_avatar"
                 app:layout_constraintStart_toEndOf="@id/component_avatar"
